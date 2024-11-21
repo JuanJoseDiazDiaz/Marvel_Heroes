@@ -16,6 +16,7 @@
 
 package com.santosgo.mavelheroes.data
 
+import com.santosgo.marvelheroescompose.R
 import com.santosgo.marvelheroescompose.model.Hero
 
 object Datasource {
