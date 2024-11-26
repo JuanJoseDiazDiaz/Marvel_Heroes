@@ -11,7 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.santosgo.marvelheroescompose.ui.components.StandardTextComp
-import com.santosgo.marvelheroescompose.ui.theme.MarvelHeroesComposeTheme
+import com.santosgo.marvelheroescompose.ui.screens.HeroListScreen
+import com.santosgo.marvelheroescompose.ui.screens.MarvelHeroesComposeTheme
 import com.santosgo.mavelheroes.data.Datasource
 
 class MainActivity : ComponentActivity() {
@@ -21,13 +22,19 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MarvelHeroesComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    StandardTextComp(
-                        text = "SantosGo",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+               MarvelHeroesApp()
             }
+        }
+    }
+}
+@Composable
+fun MarvelHeroesApp() {
+    // Crear la lista de héroes y añadir duplicados para probar el desplazamiento
+    val heroes = Datasource.getListXtimes(4)
+
+    MarvelHeroesComposeTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            HeroListScreen(heroes, Modifier.padding(innerPadding))
         }
     }
 }
@@ -36,6 +43,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HeroListPreview() {
     MarvelHeroesComposeTheme {
-        StandardTextComp("SantosGo")
+       MarvelHeroesApp()
     }
 }
