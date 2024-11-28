@@ -97,3 +97,56 @@ fun HeroCard(hero: Hero) {
         }
     }
 }
+@Composable
+fun HeroCardLand(hero: Hero) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 24.dp),
+        shape = MaterialTheme.shapes.large
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            // Imagen del héroe
+            ImageComp(
+                modifier = Modifier,
+                drawable = Datasource.getDrawableIdByName(hero.photo),
+                height = 100,
+                width = 100
+            )
+
+            // Columna con el nombre y atributos del héroe
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 16.dp)
+            ) {
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.Bottom) {
+                    StandardTextComp(
+                        text = hero.name,
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    StandardTextComp(
+                        text = "Poder: ${hero.power}",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    StandardTextComp(
+                        text = "Inteligencia: ${hero.intelligence}",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                StandardTextComp(
+                    text = stringResource(R.string.hero_description, hero.description),
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
+        }
+    }
+}
