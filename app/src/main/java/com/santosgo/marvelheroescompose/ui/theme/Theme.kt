@@ -9,7 +9,9 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -17,8 +19,8 @@ import com.example.ui.theme.AppTypography
 
 @Immutable
 data class ExtendedColorScheme(
-    val customCards: ColorFamily,
     val customHeader: ColorFamily,
+    val customCard: ColorFamily,
 )
 
 private val lightScheme = lightColorScheme(
@@ -250,92 +252,92 @@ private val highContrastDarkColorScheme = darkColorScheme(
 )
 
 val extendedLight = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsLight,
-  onCustomCardsLight,
-  customCardsContainerLight,
-  onCustomCardsContainerLight,
-  ),
   customHeader = ColorFamily(
   customHeaderLight,
   onCustomHeaderLight,
   customHeaderContainerLight,
   onCustomHeaderContainerLight,
   ),
+  customCard = ColorFamily(
+  customCardLight,
+  onCustomCardLight,
+  customCardContainerLight,
+  onCustomCardContainerLight,
+  ),
 )
 
 val extendedDark = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsDark,
-  onCustomCardsDark,
-  customCardsContainerDark,
-  onCustomCardsContainerDark,
-  ),
   customHeader = ColorFamily(
   customHeaderDark,
   onCustomHeaderDark,
   customHeaderContainerDark,
   onCustomHeaderContainerDark,
   ),
+  customCard = ColorFamily(
+  customCardDark,
+  onCustomCardDark,
+  customCardContainerDark,
+  onCustomCardContainerDark,
+  ),
 )
 
 val extendedLightMediumContrast = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsLightMediumContrast,
-  onCustomCardsLightMediumContrast,
-  customCardsContainerLightMediumContrast,
-  onCustomCardsContainerLightMediumContrast,
-  ),
   customHeader = ColorFamily(
   customHeaderLightMediumContrast,
   onCustomHeaderLightMediumContrast,
   customHeaderContainerLightMediumContrast,
   onCustomHeaderContainerLightMediumContrast,
   ),
+  customCard = ColorFamily(
+  customCardLightMediumContrast,
+  onCustomCardLightMediumContrast,
+  customCardContainerLightMediumContrast,
+  onCustomCardContainerLightMediumContrast,
+  ),
 )
 
 val extendedLightHighContrast = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsLightHighContrast,
-  onCustomCardsLightHighContrast,
-  customCardsContainerLightHighContrast,
-  onCustomCardsContainerLightHighContrast,
-  ),
   customHeader = ColorFamily(
   customHeaderLightHighContrast,
   onCustomHeaderLightHighContrast,
   customHeaderContainerLightHighContrast,
   onCustomHeaderContainerLightHighContrast,
   ),
+  customCard = ColorFamily(
+  customCardLightHighContrast,
+  onCustomCardLightHighContrast,
+  customCardContainerLightHighContrast,
+  onCustomCardContainerLightHighContrast,
+  ),
 )
 
 val extendedDarkMediumContrast = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsDarkMediumContrast,
-  onCustomCardsDarkMediumContrast,
-  customCardsContainerDarkMediumContrast,
-  onCustomCardsContainerDarkMediumContrast,
-  ),
   customHeader = ColorFamily(
   customHeaderDarkMediumContrast,
   onCustomHeaderDarkMediumContrast,
   customHeaderContainerDarkMediumContrast,
   onCustomHeaderContainerDarkMediumContrast,
   ),
+  customCard = ColorFamily(
+  customCardDarkMediumContrast,
+  onCustomCardDarkMediumContrast,
+  customCardContainerDarkMediumContrast,
+  onCustomCardContainerDarkMediumContrast,
+  ),
 )
 
 val extendedDarkHighContrast = ExtendedColorScheme(
-  customCards = ColorFamily(
-  customCardsDarkHighContrast,
-  onCustomCardsDarkHighContrast,
-  customCardsContainerDarkHighContrast,
-  onCustomCardsContainerDarkHighContrast,
-  ),
   customHeader = ColorFamily(
   customHeaderDarkHighContrast,
   onCustomHeaderDarkHighContrast,
   customHeaderContainerDarkHighContrast,
   onCustomHeaderContainerDarkHighContrast,
+  ),
+  customCard = ColorFamily(
+  customCardDarkHighContrast,
+  onCustomCardDarkHighContrast,
+  customCardContainerDarkHighContrast,
+  onCustomCardContainerDarkHighContrast,
   ),
 )
 
@@ -351,11 +353,15 @@ val unspecified_scheme = ColorFamily(
     Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 
+val LocalExtendedColorScheme = staticCompositionLocalOf {
+    extendedLight //tomar cualquiera de los creados como referencia.
+}
+
 @Composable
-fun AppTheme(
+fun MarvelHeroesComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable() () -> Unit
 ) {
   val colorScheme = when {
@@ -368,10 +374,17 @@ fun AppTheme(
       else -> lightScheme
   }
 
-  MaterialTheme(
-    colorScheme = colorScheme,
-    typography = AppTypography,
-    content = content
-  )
+    val extendedColorScheme = when {
+        darkTheme -> extendedDark
+        else -> extendedLight
+    }
+
+    CompositionLocalProvider(LocalExtendedColorScheme provides extendedColorScheme) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = AppTypography,
+            content = content
+        )
+    }
 }
 

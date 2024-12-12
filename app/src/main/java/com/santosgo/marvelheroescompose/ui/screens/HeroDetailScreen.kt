@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -50,7 +51,7 @@ fun HeroDetailCompactScreen(hero_name: String, navController: NavController, mod
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                StandardTextComp(text = stringResource(R.string.powerHero, hero.power))
+                StandardTextComp(text = stringResource(R.string.power, hero.power))
                 StandardTextComp(text = stringResource(R.string.intelligence, hero.intelligence))
             }
             Spacer(modifier = Modifier.height(16.dp))
@@ -61,7 +62,6 @@ fun HeroDetailCompactScreen(hero_name: String, navController: NavController, mod
         } ?: StandardTextComp(stringResource(R.string.hero_not_found), style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(32.dp))
-
         StandardButtonComp(label = stringResource(R.string.back), onClick = { navController.navigateUp() })
     }
 }
@@ -69,5 +69,5 @@ fun HeroDetailCompactScreen(hero_name: String, navController: NavController, mod
 @Preview
 @Composable
 fun HeroDetailCompactScreenPreview() {
-    // HeroDetailCompactScreen("Hulk")
+    HeroDetailCompactScreen("Hulk", navController = rememberNavController())
 }

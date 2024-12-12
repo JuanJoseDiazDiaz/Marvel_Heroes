@@ -1,16 +1,21 @@
 <resources>
     <string name="app_name">MarvelHeroesCompose</string>
-    <string name="default_content_descrip">Imagen sin descripcion.</string>
-    <string name="marvel_hero_list">Lista de Marvel Heroes</string>
-    <string name="powerHero">PowerHero</string>
-    <string name="intelligence">InteligenciaHeroe</string>
-    <string name="more_content_desc">Icono</string>
-    <string name="hero_description">Descripcion Heroe</string>
-    <string name="delete_desc">Eliminado</string>
-    <string name="profile_name">Nombre Usuario</string>
+    <string name="default_content_descrip">Image without description.</string>
+    <string name="marvel_hero_list">List of Heroes</string>
+    <string name="more_content_desc">Show description</string>
+    <string name="hero_description">Description: %s.</string>
+    <string name="profile_name">Profile</string>
     <string name="logout">Logout</string>
     <string name="login">Login</string>
-    <string name="hero_image_desc">Imagen del Heroe:</string>
-    <string name="hero_not_found">Heroe no encontrado</string>
-    <string name="back">Atras</string>
+    <string name="power">Power: %d.</string>
+    <string name="intelligence">Intelligence: %d.</string>
+    <string name="delete_desc">Button to delete from favorites</string>
+    <string name="marvel_fav_list">List of favorites</string>
+    <string name="hero_image_desc">Image of the hero %s.</string>
+    <string name="hero_not_found">Hero not found!</string>
+    <string name="back">Back</string>
+    <string name="delete_hero">Delete Hero</string>
+    <string name="delete_hero_confirmation">¿Are you sure you want to delete %s from favorites?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
 </resources>

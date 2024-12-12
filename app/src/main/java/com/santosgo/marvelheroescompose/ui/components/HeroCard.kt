@@ -29,7 +29,7 @@ import com.santosgo.marvelheroescompose.model.Hero
 import com.santosgo.mavelheroes.data.Datasource
 
 @Composable
-fun HeroCard(hero: Hero, onClick: () -> Unit) {
+fun HeroCard2(hero: Hero, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -100,6 +100,7 @@ fun HeroCard(hero: Hero, onClick: () -> Unit) {
         }
     }
 }
+
 @Composable
 fun HeroCardLand(hero: Hero) {
     Card(
@@ -127,9 +128,11 @@ fun HeroCardLand(hero: Hero) {
                     .weight(1f)
                     .padding(start = 16.dp)
             ) {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Bottom) {
+                    verticalAlignment = Alignment.Bottom
+                ) {
                     StandardTextComp(
                         text = hero.name,
                         style = MaterialTheme.typography.headlineMedium
@@ -153,8 +156,9 @@ fun HeroCardLand(hero: Hero) {
         }
     }
 }
+
 @Composable
-fun FavHeroCard(hero: Hero) {
+fun FavHeroCard(hero: Hero, heroes: MutableList<Hero>, modifier: Modifier = Modifier) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -186,7 +190,7 @@ fun FavHeroCard(hero: Hero) {
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 StandardTextComp(
-                    text = stringResource(R.string.powerHero, hero.power),
+                    text = stringResource(R.string.power, hero.power),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 StandardTextComp(
@@ -197,7 +201,9 @@ fun FavHeroCard(hero: Hero) {
             Column(verticalArrangement = Arrangement.SpaceAround) {
                 // Botón de acción con ícono
                 IconButton(
-                    onClick = { Log.d("FavHeroCard", "Botón eliminar pulsado") }, //incluir el héroe en favoritos
+                    onClick = {
+//                      heroes.removeIf()
+                    },
                     modifier = Modifier.size(48.dp)
                 ) {
                     Icon(
@@ -251,15 +257,17 @@ fun FavHeroCardLand(hero: Hero) {
                     .weight(1f)
                     .padding(start = 16.dp)
             ) {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Bottom) {
+                    verticalAlignment = Alignment.Bottom
+                ) {
                     StandardTextComp(
                         text = hero.name,
                         style = MaterialTheme.typography.headlineMedium
                     )
                     StandardTextComp(
-                        text = stringResource(R.string.powerHero, hero.power),
+                        text = stringResource(R.string.power, hero.power),
                         style = MaterialTheme.typography.bodyMedium
                     )
                     StandardTextComp(
@@ -267,7 +275,12 @@ fun FavHeroCardLand(hero: Hero) {
                         style = MaterialTheme.typography.bodyMedium
                     )
                     IconButton(
-                        onClick = { Log.d("FavHeroCard", "Botón favorito pulsado") }, //incluir el héroe en favoritos
+                        onClick = {
+                            Log.d(
+                                "FavHeroCard",
+                                "Botón favorito pulsado"
+                            )
+                        }, //incluir el héroe en favoritos
                         modifier = Modifier.size(48.dp)
                     ) {
                         Icon(
